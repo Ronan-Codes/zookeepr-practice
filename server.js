@@ -1,11 +1,13 @@
 const express = require('express');
+
+const PORT = process.env.PORT || 3001;
 const app = express();
 
 const { animals } = require('./data/animals.json');
 
 // ctrl+c to stop server
-app.listen(3001, () => {
-    console.log(`API server now on port 3001!`);
+app.listen(PORT, () => {
+    console.log(`API server now on port ${PORT}!`);
 })
 // access by http://localhost:3001/api/
 
@@ -61,3 +63,8 @@ app.get('/api/animals', (req, res) => {
     }
     res.json(results);
 })
+
+
+
+// heroku links: https://zookeepr-practice-galvez.herokuapp.com/
+//               https://git.heroku.com/zookeepr-practice-galvez.git
