@@ -108,6 +108,24 @@
         "loving"
       ],
       "id": "10"
+    },
+    {
+      "name": "Larry",
+      "species": "lemur",
+      "diet": "omnivore",
+      "personalityTraits": [
+        "hungry"
+      ],
+      "id": "11"
+    },
+    {
+      "name": "Mochi",
+      "species": "Doge",
+      "diet": "Checkers Fries",
+      "personalityTraits": [
+        "hungry, quirky, beastly"
+      ],
+      "id": "12"
     }
   ]
 }
