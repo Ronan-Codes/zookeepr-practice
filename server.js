@@ -1,22 +1,24 @@
 const express = require('express');
-
 const PORT = process.env.PORT || 3001;
 const app = express();
-// (MIDDLEWARES) - parse incoming string or array data 
+
+// Middlewares
+// Parse incoming string or array data 
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data 
 app.use(express.json());
 
+// Makes 'public' folder static, so it doesn't need server endpoint 
+app.use(express.static('public'));
+// Middlewares end
+
 const fs = require('fs');
 const path = require('path');
 
+// animals.json array
 const { animals } = require('./data/animals.json');
 
-// ctrl+c to stop server
-app.listen(PORT, () => {
-    console.log(`API server now on port ${PORT}!`);
-})
-// access by http://localhost:3001/api/
+// ================================================
 
 function validateAnimal(animal) {
     if(!animal.name || typeof animal.name !== 'string') {
@@ -28,7 +30,7 @@ function validateAnimal(animal) {
     if(!animal.diet || typeof animal.diet !== 'string') {
         return false;
     }
-    // REVIEW
+    // REVIEW !!!
     if(!animal.personalityTraits || !Array.isArray(animal.personalityTraits)) {
         return false;
     }
@@ -136,7 +138,36 @@ app.post('/api/animals', (req, res) => {
     }
 })
 
+// serve index.html from Express.js
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/index.html"));
+})
+// "/" root route of the server (homepage)
 
+app.get('/animals', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+
+app.get('/zookeepers', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+});
+
+// Wildecard Route - defaults to root route (must be last route)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+// ctrl+c to stop server
+app.listen(PORT, () => {
+    console.log(`API server now on port ${PORT}!`);
+})
+// access by http://localhost:3001/api/
 
 // heroku links: https://zookeepr-practice-galvez.herokuapp.com/
 //               https://git.heroku.com/zookeepr-practice-galvez.git
+
+// Other Notes
+// Linking between pages no longer needs .html extensions. 
+// It just needs the associated route name. 
+// It also doesn't need the “Open in Browser” extension!
+

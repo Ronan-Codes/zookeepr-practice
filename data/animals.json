@@ -126,6 +126,16 @@
         "hungry, quirky, beastly"
       ],
       "id": "12"
+    },
+    {
+      "name": "Rory",
+      "species": "Doge",
+      "diet": "omnivore",
+      "personalityTraits": [
+        "anxious",
+        "loving"
+      ],
+      "id": "13"
     }
   ]
 }
